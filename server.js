@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const pdf2text = require('./controllers/pdf');
 
 // Set up the express app
 const app = express();
@@ -16,6 +17,8 @@ app.use(morgan('dev'));
 app.get('/', (request, response) =>
   response.status(200).json({ msg: 'Welcome to PDF Convert Microservice' })
 );
+
+app.get('/test', pdf2text.convert);
 
 app.listen(port, () => {
   console.info(`Started up at port port ${port}`);
