@@ -16,14 +16,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 app.get('/', (req, res) =>
-  response.status(200).json({ msg: 'Welcome to PDF Convert Microservice' })
+  res.status(200).json({ msg: 'Welcome to PDF Convert Microservice' })
 );
 
 app.post('/extract-text', upload.pdf, pdf.extract_text);
 app.post('/convert-to-images', upload.pdf, pdf.convert_to_images);
 
 app.listen(port, () => {
-  console.info(`Started up at port port ${port}`);
+  console.info(`Started up at port ${port}`);
 });
 
 module.exports = app;
