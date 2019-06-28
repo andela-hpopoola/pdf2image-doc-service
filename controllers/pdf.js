@@ -1,11 +1,11 @@
 const fs = require('fs');
-const pdf = require('pdf-parse');
-
-let dataBuffer = fs.readFileSync('./test.pdf');
+const pdfParse = require('pdf-parse');
 
 module.exports = {
-  convert(req, res) {
-    pdf(dataBuffer)
+  extract_text(req, res) {
+    const uploaded_pdf = res.locals.file;
+    let dataBuffer = fs.readFileSync(uploaded_pdf.path);
+    pdfParse(dataBuffer)
       .then(function(data) {
         res.json({ result: data.text, message: 'success' });
       })
