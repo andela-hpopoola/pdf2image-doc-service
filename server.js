@@ -20,6 +20,8 @@ app.get('/', (req, res) =>
 );
 
 app.post('/extract-text', upload.pdf, pdf.extract_text);
+app.post('/convert-to-images', upload.pdf, pdf.convert_to_images);
+
 app.listen(port, () => {
   console.info(`Started up at port port ${port}`);
 });
