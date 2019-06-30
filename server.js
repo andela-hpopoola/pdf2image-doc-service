@@ -1,12 +1,17 @@
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const pdf = require('./controllers/pdf');
 const upload = require('./controllers/upload');
 
 // Set up the express app
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 4001;
+
+//enable cors
+app.use(cors());
 
 // Parse incoming requests data
 app.use(bodyParser.json());

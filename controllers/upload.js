@@ -11,7 +11,7 @@ const storage = multer.diskStorage({
   }
 });
 
-const MAX_PDF_SIZE = 2000000; //2MB
+const MAX_PDF_SIZE = 1000000; //1MB
 const upload = multer({
   limits: { fileSize: MAX_PDF_SIZE },
   storage: storage
