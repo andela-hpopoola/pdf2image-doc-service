@@ -5,6 +5,10 @@ const cors = require('cors');
 
 const pdf = require('./controllers/pdf');
 const upload = require('./controllers/upload');
+const middleware = require('./controllers/middleware');
+
+// Get all environment variables
+require('dotenv').config();
 
 // Set up the express app
 const app = express();
@@ -24,8 +28,18 @@ app.get('/', (req, res) =>
   res.status(200).json({ msg: 'Welcome to PDF Convert Microservice' })
 );
 
-app.post('/extract-text', upload.pdf, pdf.extract_text);
-app.post('/convert-to-images', upload.pdf, pdf.convert_to_images);
+app.post(
+  '/extract-text',
+  middleware.checkUserAuth,
+  upload.pdf,
+  pdf.extract_text
+);
+app.post(
+  '/convert-to-images',
+  middleware.checkUserAuth,
+  upload.pdf,
+  pdf.convert_to_images
+);
 
 app.listen(port, () => {
   console.info(`Started up at port ${port}`);
